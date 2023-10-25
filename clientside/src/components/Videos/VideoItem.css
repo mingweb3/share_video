@@ -1,0 +1,59 @@
+.video-thumb {
+  max-width: none;
+  flex: 0 0 100%;
+}
+
+@media (min-width: 640px) {
+  .video-thumb {
+    max-width: 240px;
+    flex: 0 0 240px;
+  }
+}
+
+@media (min-width: 768px) {
+  .video-thumb {
+    max-width: 360px;
+    flex: 0 0 360px;
+  }
+}
+
+.video-img {
+  position: relative;
+  cursor: pointer;
+}
+
+.video-img:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 47, 0.3);
+  transition: background-color 0.2s ease;
+}
+
+.video-img:hover:after {
+  background-color: rgba(0, 0, 47, 0.7);
+}
+
+.video-img > svg {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  margin-top: -40px;
+  margin-left: -40px;
+  z-index: 2;
+  top: 50%; 
+  left: 50%; 
+  box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
+}
+
+@media (min-width: 640px) {
+  .video-img > svg {
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+  }
+}

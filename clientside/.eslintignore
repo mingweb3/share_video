@@ -1,0 +1,7 @@
+node_modules
+.vscode
+.next
+dist
+out
+*.js
+yarn.lock
