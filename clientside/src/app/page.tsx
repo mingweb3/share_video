@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 'use client'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
