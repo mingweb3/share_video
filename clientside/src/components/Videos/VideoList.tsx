@@ -1,14 +1,29 @@
+'use client'
+
 import VideoItem from './VideoItem'
 
-const videos = ['BZ0QER_0ZWI', '_A_Jpr9HkGA', 'hkRiMtq8LEo', 'sCeiwVEjhx4']
+import { getIDfromURL } from '@/utils/general.helper'
 
-function VideoList() {
+interface IVideoListProps {
+  data: ISharedVideo[]
+}
+
+function VideoList({ data }: IVideoListProps) {
   return (
-    <section className="flex flex-col gap-12 video-listing">
-      {videos.map((item: string) => {
-        return <VideoItem key={item} vId={item} />
-      })}
-    </section>
+    <div>
+      {data.length > 0 ? (
+        <section className="video-listing flex flex-col gap-12">
+          {data.map((item: ISharedVideo) => {
+            const videoID = getIDfromURL(item.url)
+
+            if (videoID) return <VideoItem key={item.id} vId={videoID} />
+            return null
+          })}
+        </section>
+      ) : (
+        <>No Data</>
+      )}
+    </div>
   )
 }
 

@@ -1,3 +1,8 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable import/no-extraneous-dependencies */
+import type { AxiosError } from 'axios'
+import axios from 'axios'
+
 export const isEmpty = (value: any): value is boolean => {
   if (value === null || value === undefined) return true
   if (typeof value === 'number') return false
@@ -31,4 +36,20 @@ export function isActiveMenu(menuItemHref: string, pathname: string): boolean {
     return true
   }
   return false
+}
+
+export function isAxiosError<T>(error: unknown): error is AxiosError<T> {
+  return axios.isAxiosError(error)
+}
+
+export function getIDfromURL(url: string) {
+  const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
+
+  const match = url.match(regExp)
+
+  if (match && match[2].length === 11) {
+    return match[2]
+  }
+
+  return undefined
 }

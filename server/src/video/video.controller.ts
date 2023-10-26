@@ -5,7 +5,6 @@ import { InsertVideoDTO } from './dto';
 import { VideoService } from './video.service';
 import { PaginationParamsDto } from 'src/sharedDto';
 
-@UseGuards(MJwtGuard)
 @Controller('videos')
 export class VideoController {
   constructor(private videoService: VideoService) {}
@@ -15,6 +14,7 @@ export class VideoController {
     return this.videoService.getVideos(page, limit);
   }
 
+  @UseGuards(MJwtGuard)
   @Post()
   insertVideo(
     @GetUser('id') userId: number,

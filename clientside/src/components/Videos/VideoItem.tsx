@@ -2,12 +2,12 @@
 
 import { useQuery } from '@tanstack/react-query'
 
+import VideoItemPlaceholder from './VideoItemPlaceholder'
 import PlayerArrow from '../Svg/PlayerArrow'
 import VoteDownIcon from '../Svg/VoteDown'
 import VoteUpIcon from '../Svg/VoteUp'
 
 import { getYoutubeVideoById } from '@/services/youtube.api'
-import VideoItemPlaceholder from './VideoItemPlaceholder'
 
 import './VideoItem.css'
 
@@ -41,7 +41,7 @@ function VideoItem({ vId }: IVideoItemProps) {
             <p className="mb-4">
               Shared by: <span>someone@gmail.com</span>
             </p>
-            <div className="flex flex-row gap-6 mb-4 vote">
+            <div className="vote mb-4 flex flex-row gap-6">
               <div className="flex flex-row items-center gap-1 text-white">
                 122 <VoteUpIcon color="#777777" />
               </div>

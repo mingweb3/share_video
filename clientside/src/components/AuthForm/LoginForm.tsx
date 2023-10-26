@@ -2,12 +2,45 @@
 
 'use client'
 
+import { useMutation } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 
-import { EMAIL_REGEX, PASSWORD_REGEX } from '@/constant/validatePattern'
+import ErrorBox from '../ErrorBox'
 
-function LoginForm() {
+import { EMAIL_REGEX, PASSWORD_REGEX } from '@/constant/validatePattern'
+import { loginFn } from '@/services/auth.api'
+import type { IErrorForm } from '@/types/error'
+import { isAxiosError } from '@/utils/general.helper'
+
+interface ILoginFormlProps {
+  onClose?: () => void
+}
+
+function LoginForm({ onClose }: ILoginFormlProps) {
+  // API Login Mutation
+  const {
+    mutate: loginQuery,
+    isPending,
+    error
+  } = useMutation({
+    mutationFn: (userData: ILoginForm) => loginFn(userData),
+    onSuccess: (data: IAuth) => {
+      localStorage.setItem('at', data.accessToken)
+      if (onClose) onClose()
+      setTimeout(() => window.location.reload(), 400)
+    }
+  })
+
+  // Error handle
+  const errorForm = useMemo(() => {
+    if (isAxiosError<{ error: IErrorForm }>(error)) {
+      return error.response?.data as unknown as IErrorForm
+    }
+    return undefined
+  }, [error])
+
   // Submit Login Form
   const {
     register,
@@ -16,8 +49,9 @@ function LoginForm() {
   } = useForm<ILoginForm>()
 
   const onSubmit: SubmitHandler<ILoginForm> = data => {
-    // if (isLoading) return
-    console.log(data)
+    if (isPending) return
+    loginQuery(data)
+    // loginQuery.mutate(data)
   }
 
   return (
@@ -49,10 +83,16 @@ function LoginForm() {
             </div>
           )}
         </div>
+        {errorForm && (
+          <div className="pt-4">
+            <ErrorBox errorData={errorForm} />
+          </div>
+        )}
         <div className="pt-4 text-center">
           <button
+            disabled={isPending}
             type="submit"
-            className="bg-primary hover:bg-blue2 dark:bg-blue min-w-[120px] rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="btn-primary bg-primary hover:bg-blue2 dark:bg-blue min-w-[120px] rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Login
           </button>

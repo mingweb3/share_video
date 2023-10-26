@@ -36,7 +36,13 @@ function Nav() {
           </li>
         </ul>
       </nav>
-      {showModalLogin && <Modal onClose={() => setShowModalLogin(false)} title="Login" content={<LoginForm />} />}
+      {showModalLogin && (
+        <Modal
+          onClose={() => setShowModalLogin(false)}
+          title="Login"
+          content={<LoginForm onClose={() => setShowModalLogin(false)} />}
+        />
+      )}
       {showModalSignIn && (
         <Modal onClose={() => setShowModalSignIn(false)} title="Register new account" content={<SignInForm />} />
       )}

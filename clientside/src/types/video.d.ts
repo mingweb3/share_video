@@ -1,3 +1,17 @@
+interface ISharedVideo {
+  id: string
+  url: string
+  createdAt: string
+  updatedAt: string
+  userId: number
+  snippet: IVideoAttr
+  user?: IUser
+}
+
+interface ISharedVideoList {
+  pages: number
+  items: ISharedVideo[]
+}
 interface IVideo {
   id: string
   kind: string
