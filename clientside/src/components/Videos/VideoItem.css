@@ -3,10 +3,18 @@
   flex: 0 0 100%;
 }
 
+.video-thumb span {
+  height: calc((100vw - 48px) / 2);
+}
+
 @media (min-width: 640px) {
   .video-thumb {
     max-width: 240px;
     flex: 0 0 240px;
+  }
+
+  .video-thumb span {
+    height: 135px;
   }
 }
 
@@ -14,6 +22,10 @@
   .video-thumb {
     max-width: 360px;
     flex: 0 0 360px;
+  }
+
+  .video-thumb span {
+    height: 200px;
   }
 }
 
@@ -44,8 +56,8 @@
   margin-top: -40px;
   margin-left: -40px;
   z-index: 2;
-  top: 50%; 
-  left: 50%; 
+  top: 50%;
+  left: 50%;
   box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
 }
 

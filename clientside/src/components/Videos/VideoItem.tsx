@@ -7,6 +7,8 @@ import VoteDownIcon from '../Svg/VoteDown'
 import VoteUpIcon from '../Svg/VoteUp'
 
 import { getYoutubeVideoById } from '@/services/youtube.api'
+import VideoItemPlaceholder from './VideoItemPlaceholder'
+
 import './VideoItem.css'
 
 interface IVideoItemProps {
@@ -25,7 +27,7 @@ function VideoItem({ vId }: IVideoItemProps) {
 
   return (
     <>
-      {isLoading && <div>Loading video item...</div>}
+      {isLoading && <VideoItemPlaceholder />}
       {data && !isLoading && (
         <div className="video-item border-gray3 flex flex-col gap-6 border-b-[1px] border-solid pb-8 sm:flex-row">
           <div className="video-thumb">
@@ -39,7 +41,7 @@ function VideoItem({ vId }: IVideoItemProps) {
             <p className="mb-4">
               Shared by: <span>someone@gmail.com</span>
             </p>
-            <div className="vote mb-4 flex flex-row gap-6">
+            <div className="flex flex-row gap-6 mb-4 vote">
               <div className="flex flex-row items-center gap-1 text-white">
                 122 <VoteUpIcon color="#777777" />
               </div>
@@ -48,7 +50,7 @@ function VideoItem({ vId }: IVideoItemProps) {
               </div>
             </div>
             {data.snippet.description && <div className="font-bold">Description:</div>}
-            {data.snippet.description && <div>{data.snippet.description}</div>}
+            {data.snippet.description && <div className="break-all">{data.snippet.description}</div>}
           </div>
         </div>
       )}
