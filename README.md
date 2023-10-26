@@ -25,5 +25,5 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 
 ## Folder Stucture 
 
-1. Frontend Side -> Read this README
-2. Backend Side -> Read this README
+1. Frontend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/clientside/README.md)
+2. Backend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/server/README.md)
