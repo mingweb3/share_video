@@ -2,13 +2,41 @@
 
 'use client'
 
+import { useMutation } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 
+import ErrorBox from '../ErrorBox'
+
 import { EMAIL_REGEX, NOT_EMPTY, PASSWORD_REGEX } from '@/constant/validatePattern'
+import { signInFn } from '@/services/auth.api'
+import type { IErrorForm } from '@/types/error'
+import { isAxiosError } from '@/utils/general.helper'
 
 function SignInForm() {
-  // Submit Login Form
+  // API Login Mutation
+  const {
+    mutate: signInQuery,
+    isPending,
+    error
+  } = useMutation({
+    mutationFn: (userData: IRegisterForm) => signInFn(userData),
+    onSuccess: (data: IAuth) => {
+      localStorage.setItem('at', data.accessToken)
+      setTimeout(() => window.location.reload(), 400)
+    }
+  })
+
+  // Error handle
+  const errorForm = useMemo(() => {
+    if (isAxiosError<{ error: IErrorForm }>(error)) {
+      return error.response?.data as unknown as IErrorForm
+    }
+    return undefined
+  }, [error])
+
+  // Submit SignIn Form
   const {
     register,
     formState: { errors },
@@ -16,8 +44,8 @@ function SignInForm() {
   } = useForm<IRegisterForm>()
 
   const onSubmit: SubmitHandler<IRegisterForm> = data => {
-    // if (isLoading) return
-    console.log(data)
+    if (isPending) return
+    signInQuery(data)
   }
 
   return (
@@ -57,6 +85,11 @@ function SignInForm() {
             </div>
           )}
         </div>
+        {errorForm && (
+          <div className="pt-4">
+            <ErrorBox errorData={errorForm} />
+          </div>
+        )}
         <div className="pt-4 text-center">
           <button
             type="submit"

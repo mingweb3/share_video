@@ -2,12 +2,25 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 import Container from './Container'
 import Nav from './Nav'
-// import TopBarUser from '../TopBarUser'
+import TopBarUser from '../TopBarUser'
+
+import { useAuth } from '@/hooks/useAuth'
 
 function Header() {
+  // HOOK to handle token and persit for temporary.
+  // Should use Global State to do it
+  const { isAuth, me, getMe } = useAuth()
+
+  useEffect(() => {
+    getMe()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <Container>
       <div className="item-start flex flex-row justify-between pb-4 pt-8 sm:items-center sm:px-4">
@@ -18,8 +31,8 @@ function Header() {
           </Link>
         </div>
         <div className="nav-left-side">
-          <Nav />
-          {/* <TopBarUser /> */}
+          {isAuth === true && me && <TopBarUser data={me} />}
+          {!isAuth && <Nav />}
         </div>
       </div>
     </Container>

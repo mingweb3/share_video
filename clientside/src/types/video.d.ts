@@ -8,6 +8,10 @@ interface ISharedVideo {
   user?: IUser
 }
 
+interface ISharedUrlForm {
+  url: string
+}
+
 interface ISharedVideoList {
   pages: number
   items: ISharedVideo[]

@@ -5,6 +5,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { VideoList } from '@/components/Videos'
+import { itemPerPage } from '@/constant/site.config'
 import { getVideosFn } from '@/services/video.api'
 
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -14,7 +15,7 @@ export default function Home() {
   const { data, isLoading } = useQuery({
     queryKey: ['shared-videos', 1],
     queryFn: () => {
-      return getVideosFn({ limit: 2, page: 1 })
+      return getVideosFn({ limit: itemPerPage, page: 1 })
     },
     retry: 0
   })

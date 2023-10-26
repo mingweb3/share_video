@@ -14,11 +14,11 @@ import { loginFn } from '@/services/auth.api'
 import type { IErrorForm } from '@/types/error'
 import { isAxiosError } from '@/utils/general.helper'
 
-interface ILoginFormlProps {
+interface ILoginFormProps {
   onClose?: () => void
 }
 
-function LoginForm({ onClose }: ILoginFormlProps) {
+function LoginForm({ onClose }: ILoginFormProps) {
   // API Login Mutation
   const {
     mutate: loginQuery,
@@ -51,7 +51,6 @@ function LoginForm({ onClose }: ILoginFormlProps) {
   const onSubmit: SubmitHandler<ILoginForm> = data => {
     if (isPending) return
     loginQuery(data)
-    // loginQuery.mutate(data)
   }
 
   return (

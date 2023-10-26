@@ -16,7 +16,7 @@ function VideoList({ data }: IVideoListProps) {
           {data.map((item: ISharedVideo) => {
             const videoID = getIDfromURL(item.url)
 
-            if (videoID) return <VideoItem key={item.id} vId={videoID} />
+            if (videoID) return <VideoItem key={item.id} vId={videoID} sVideo={item} />
             return null
           })}
         </section>

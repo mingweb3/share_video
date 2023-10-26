@@ -21,3 +21,25 @@ class Http {
 const clientRequest = new Http().instance
 
 export default clientRequest
+
+export const getWToken = (url: string, token: string) => {
+  return axios.get(url, {
+    baseURL: apiBeBase,
+    timeout: 20000,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  })
+}
+
+export const postWToken = (url: string, formData: any, token: string) => {
+  return axios.post(url, formData, {
+    baseURL: apiBeBase,
+    timeout: 20000,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  })
+}
