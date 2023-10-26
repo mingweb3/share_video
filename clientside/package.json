@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:4000": "next dev -p 4000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 4000",
     "lint": "eslint . \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint . \"src/**/*.{js,jsx,ts,tsx}\" --fix",
     "check-types": "tsc --pretty --noEmit",
