@@ -1,0 +1,2 @@
+export const SKELETON_BASE_COLOR = '#202020'
+export const SKELETON_HIGHLIGHT_COLOR = '#444444'

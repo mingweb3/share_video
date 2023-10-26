@@ -4,7 +4,7 @@ const videos = ['BZ0QER_0ZWI', '_A_Jpr9HkGA', 'hkRiMtq8LEo', 'sCeiwVEjhx4']
 
 function VideoList() {
   return (
-    <section className="video-listing flex flex-col gap-12 sm:max-w-[960px]">
+    <section className="flex flex-col gap-12 video-listing">
       {videos.map((item: string) => {
         return <VideoItem key={item} vId={item} />
       })}
