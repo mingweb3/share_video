@@ -44,7 +44,7 @@ function VideoItem({ vId, sVideo }: IVideoItemProps) {
               </Link>
             </div>
             <div className="video-content text-graylight">
-              <h4 className="text-[24px] text-white">{data.snippet.title}</h4>
+              <h4 className="text-[16px] text-white sm:text-[24px]">{data.snippet.title}</h4>
               {user && user.email && (
                 <p className="mb-4">
                   Shared by: <span>{user.email}</span>

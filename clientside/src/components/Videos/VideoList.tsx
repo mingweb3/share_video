@@ -21,7 +21,7 @@ function VideoList({ data }: IVideoListProps) {
           })}
         </section>
       ) : (
-        <>No Data</>
+        <div className="text-center">No Data</div>
       )}
     </div>
   )

@@ -30,7 +30,7 @@ function Header() {
             <span className="text-lg font-bold">Funny Movies</span>
           </Link>
         </div>
-        <div className="nav-left-side">
+        <div className="nav-left-side flex items-center">
           {isAuth === true && me && <TopBarUser data={me} />}
           {!isAuth && <Nav />}
         </div>

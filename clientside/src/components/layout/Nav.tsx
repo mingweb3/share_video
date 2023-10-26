@@ -12,7 +12,7 @@ function Nav() {
   return (
     <>
       <nav>
-        <ul className="flex flex-row items-center gap-6 text-xl">
+        <ul className="flex flex-row items-center gap-2 text-sm sm:gap-6 sm:text-xl">
           <li>
             <span
               onClick={() => setShowModalLogin(true)}

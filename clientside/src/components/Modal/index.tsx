@@ -1,5 +1,7 @@
 'use client'
 
+import CrossIcon from '../Svg/Cross'
+
 interface IModalProps {
   onClose: () => void
   title: string
@@ -18,9 +20,7 @@ function Modal({ onClose, title, content }: IModalProps) {
               type="button"
               className="float-right ml-auto border-0 bg-transparent p-1 text-lg font-semibold leading-none outline-none focus:outline-none"
             >
-              <span className="block bg-transparent text-2xl font-light text-[#bbbbbb] outline-none focus:outline-none">
-                x
-              </span>
+              <CrossIcon />
             </button>
           </div>
           <div className="relative flex-auto p-5">{content}</div>

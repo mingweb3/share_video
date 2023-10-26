@@ -7,8 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "prisma:dev:deploy": "prisma migrate deploy",
-    "db:dev:remove": "docker compose rm dev-database --stop --force --volumes",
-    "db:dev:create": "docker compose up dev-database --detach",
+    "db:dev:remove": "docker compose rm svideo-db --stop --force --volumes",
+    "db:dev:create": "docker compose up svideo-db --detach",
     "db:dev:restart": "yarn db:dev:remove && yarn db:dev:create && yarn prisma:dev:deploy",
     "prebuild": "rimraf dist",
     "build": "nest build",
