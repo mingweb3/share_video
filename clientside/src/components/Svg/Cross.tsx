@@ -10,9 +10,9 @@ function CrossIcon({ color }: CrossIconProps) {
           id="Vector"
           d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18"
           stroke={color || '#ffffff'}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

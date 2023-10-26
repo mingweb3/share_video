@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { GetUser } from 'src/auth/decorator';
 import { MJwtGuard } from 'src/auth/guard';
 import { InsertVideoDTO } from './dto';
@@ -21,5 +31,11 @@ export class VideoController {
     @Body() insertVideoDTO: InsertVideoDTO,
   ) {
     return this.videoService.insertVideo(userId, insertVideoDTO);
+  }
+
+  @Delete(':id')
+  @UseGuards(MJwtGuard)
+  deleteNoteById(@Param('id', ParseIntPipe) videoId: number) {
+    return this.videoService.deleteVideoById(videoId);
   }
 }

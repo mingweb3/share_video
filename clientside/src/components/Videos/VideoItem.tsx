@@ -37,14 +37,21 @@ function VideoItem({ vId, sVideo }: IVideoItemProps) {
           <div className=" flex flex-col gap-6  sm:flex-row">
             <div className="video-thumb">
               <Link href={url} target="_blank">
-                <figure className="video-img">
-                  <img src={data.snippet.thumbnails.maxres.url} alt="This is an img" />
+                <figure className="video-img border-gray3 overflow-hidden rounded-[12px] border-[1px] border-solid">
+                  <img
+                    src={
+                      data.snippet.thumbnails.maxres
+                        ? data.snippet.thumbnails.maxres.url
+                        : data.snippet.thumbnails.default.url
+                    }
+                    alt="This is an img"
+                  />
                   <PlayerArrow />
                 </figure>
               </Link>
             </div>
             <div className="video-content text-graylight">
-              <h4 className="text-[16px] text-white sm:text-[24px]">{data.snippet.title}</h4>
+              <h4 className="mt-[-6px] text-[16px] text-white sm:text-[24px]">{data.snippet.title}</h4>
               {user && user.email && (
                 <p className="mb-4">
                   Shared by: <span>{user.email}</span>

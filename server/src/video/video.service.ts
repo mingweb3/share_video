@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InsertVideoDTO } from './dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -44,5 +44,23 @@ export class VideoService {
       },
     });
     return video;
+  }
+
+  async deleteVideoById(videoId: number) {
+    const note = await this.prismaService.video.findUnique({
+      where: {
+        id: videoId,
+      },
+    });
+
+    if (!note) {
+      throw new ForbiddenException('There is no video!');
+    }
+
+    return this.prismaService.video.delete({
+      where: {
+        id: videoId,
+      },
+    });
   }
 }

@@ -28,8 +28,22 @@
 
 ## Installation
 
+#### Docker
+
+```bash
+$ docker compose up
+```
+#### Install NestJs Lib
+
 ```bash
 $ yarn install
+```
+
+#### Install DB and Migration
+
+```bash
+$ yarn db:dev:create
+$ yarn prisma:dev:deploy
 ```
 
 ## Running the app
@@ -71,108 +85,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-
-
-
-## MING NOTE 
-
-### 1 - DOCKER 
-
-- Create `docker-compose.yaml`  
-
-- `ls -la` -> List all Files and Folders
-
--  `docker compose up -d` -> Install and create Services - Container -> Postgres Services
-- - `-d`: deamon/background mode (Chạy ngầm)
-
--  `docker compose down` -> Remove this Services (Down this service)
-
--  `docker compose up -d dev-database -d` -> Run only "dev-database" service
-
-- `docker exec -it dev-database bash` -> To check DB, run bash 
-- `whoami` : who am i -> name of user in DB
-- `psql -U postgres -W mnestdb` : vào DB "mnestdb" to view 
-- In this DB, run `\dt` -> List all tables
-- In this space you can run SQL QUERY as you want.
-- exit bash -> exit 
-
-### 2 - Prisma 
-
-- Step 1: Install Prisma: `yarn add -D prisma`
-
-- Step 2: Init a prisma config file 
-
-- `npx prisma init` 
-
-Remember we had docker-compose.yaml file already
-
-Or 
-
-- npx prisma init --datasource-provider sqlite / mysql
-
-- Step 3: Add data Model in Prisma Schema 
-
-```
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
-}
-
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
-}
-```
-- Step 4: Run a migration to create your database tables with Prisma Migrate
-
-`npx prisma migrate dev`
-
-OR   
-
-`npx prisma migrate dev --name init` 
-
-- Input the name of this action. 
-
-- Customize CMD in package.json 
-
-```
-  "prisma:dev:deploy": "prisma migrate deploy",
-  "db:dev:remove": "docker compose rm dev-database --stop --force --volumes",
-  "db:dev:create": "docker compose up dev-database --detach",
-  "db:dev:restart": "yarn db:dev:remove && yarn db:dev:create && yarn prisma:dev:deploy",
-```
-
-- Run `yarn db:dev:restart` -> System will migrate to beginning and DB 
-
---- 
- - Để làm việc với JWT thì cần: 
-
- `yarn add @nestjs/jwt passport-jwt`
- 
-  và 
-
- `yarn add @nestjs/passport passport` 
-
-## NOTE 
-
-- DTO - Data transform object
-- If want to generate a file in NEST without spec. `nest g service --no-spec`
-
-## NODEJS EXAMPLE: 
-https://github.com/tkssharma/nestjs-advance-course 
-
-STARTER: 
-https://github.com/notiz-dev/nestjs-prisma-starter 
-
-Real project
-https://github.com/arielweinberger/nestjs-course-task-management
-https://github.com/bashleigh/nestjs-blog 
-
-
-hoc toi day: https://www.youtube.com/watch?v=ATTAVxKyc6M&t=2312s
