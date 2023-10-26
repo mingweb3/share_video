@@ -27,3 +27,6 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 
 1. Frontend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/clientside/README.md)
 2. Backend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/server/README.md)
+
+
+#### Contact me: mingweb3@gmail.com
