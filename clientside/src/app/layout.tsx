@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Home Page | Sharing video',
   description: 'Remitano Test - Sharing Video Site',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1', 
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
