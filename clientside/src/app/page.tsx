@@ -3,30 +3,34 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
 
 import NumberPagination from '@/components/Pagination/NumberPagination'
 import { VideoList } from '@/components/Videos'
 import { itemPerPage } from '@/constant/site.config'
+import useQueryParams from '@/hooks/useQueryParams'
 import { getVideosFn } from '@/services/video.api'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function Home() {
-  const [curPage, setCurPage] = useState<number>(1)
+  // Get SearchParams on URL
+  const { queryParams, setQueryParams } = useQueryParams<{
+    p?: string
+  }>()
+  const cPage = queryParams?.get('p') ? queryParams?.get('p') : 1
 
   // Query: Get Videos
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['shared-videos', curPage],
+    queryKey: ['shared-videos', cPage],
     queryFn: () => {
-      return getVideosFn({ limit: itemPerPage, page: curPage })
+      return getVideosFn({ limit: itemPerPage, page: Number(cPage) })
     },
     retry: 0
   })
 
   // Actions: Click Go to page
   const handleGoToPage = (nPage: number) => {
-    setCurPage(nPage)
+    setQueryParams({ p: nPage.toString() })
   }
 
   return (

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import ErrorBox from '../ErrorBox'
 
 import { YT_VIDEO_URL_REGEX } from '@/constant/validatePattern'
+import useQueryParams from '@/hooks/useQueryParams'
 import { postSVideoFn } from '@/services/video.api'
 import type { IErrorForm } from '@/types/error'
 import { getIDfromURL, isAxiosError } from '@/utils/general.helper'
@@ -17,7 +18,9 @@ interface IShareVideoFormProps {
 }
 
 function ShareVideoForm({ onClose }: IShareVideoFormProps) {
-  const queryClient = useQueryClient()
+  const { setQueryParams } = useQueryParams<{
+    p?: string
+  }>()
 
   // API Login Mutation
   const {
@@ -32,7 +35,7 @@ function ShareVideoForm({ onClose }: IShareVideoFormProps) {
         setTimeout(() => window.location.reload(), 200)
       }
       onClose()
-      queryClient.invalidateQueries({ queryKey: ['shared-videos', 1], exact: true })
+      setQueryParams({ p: '1' })
     }
   })
 
