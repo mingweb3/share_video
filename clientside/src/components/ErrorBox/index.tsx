@@ -1,11 +1,11 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import type { IErrorForm } from '@/types/error'
 
-interface ErrorFormProps {
+interface ErrorBoxProps {
   errorData: IErrorForm
 }
 
-function ErrorBox({ errorData }: ErrorFormProps) {
+function ErrorBox({ errorData }: ErrorBoxProps) {
   return (
     <div className="sys-msg err-msg border-red bg-red text-red rounded-lg border-[1px] border-solid bg-opacity-10 px-4 py-2">
       <div className="font-bold">

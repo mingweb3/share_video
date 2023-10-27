@@ -1,0 +1,11 @@
+.pag-btn.active {
+    background-color: #eee;
+    color: #000;
+    cursor: default;
+    pointer-events: none;
+}
+
+.pag-btn:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
