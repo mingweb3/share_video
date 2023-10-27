@@ -35,10 +35,17 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 ### Start In DEV
 
-- Copy .env.exmaple to .env
+- Copy .env.example to .env
 
 - `yarn install`
-- `yarn dev`
+- `yarn dev:4000`
+
+### Build and Run as Prod staging
+
+- Copy .env.example to .env. Check again `NEXT_PUBLIC_API_BE` is right URL from backend side
+  
+- `yarn build`
+- `yarn start`
 
 ### Run Unit Test
 

@@ -31,8 +31,9 @@
 #### Docker
 
 ```bash
-$ docker compose up
+$ docker compose up -d
 ```
+
 #### Install NestJs Lib
 
 ```bash
