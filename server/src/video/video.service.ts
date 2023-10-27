@@ -32,6 +32,7 @@ export class VideoService {
 
     return {
       pages: Math.ceil(count / limit),
+      currentPage: page,
       items,
     };
   }
