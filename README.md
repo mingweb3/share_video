@@ -23,15 +23,14 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 - Include unit tests (again)
 - Include integration test
 
-## Folder Stucture 
+## Folder Stucture
 
-1. Frontend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/clientside/README.md)
-2. Backend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/server/README.md)
-
+1. Backend: NestJS + Prisma
+2. Frontend: NextJS 13 Only Use ClientSide
 
 -----------------------------------------------
 
-### Deploy server
+### 1. Deploy server - Fully Docker
 
 ```bash
 # Install Docker Service
@@ -58,6 +57,16 @@ $ docker builder prune -a
 $ docker pull node:18.17.0
 ```
 
+### 2. Run on Local - Run database on Docker
+
+1. Install & Run Server Side 
+
+- Read this: Backend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/server/README.md)
+
+2. Install & Run Frontend
+
+- Read this: Frontend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/clientside/README.md)
+ 
 ---
 
 #### Contact me: mingweb3@gmail.com
