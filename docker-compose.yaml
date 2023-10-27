@@ -35,7 +35,7 @@ services:
     container_name: svideo-client
     restart: always
     ports:
-      - 80:3000
+      - 4000:4000
     networks:
       - mnestjs_network 
     volumes:
