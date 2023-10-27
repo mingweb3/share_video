@@ -30,3 +30,19 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 
 
 #### Contact me: mingweb3@gmail.com
+
+
+-----------------------------------------------
+### Deploy server
+
+	sudo docker-compose up -d
+
+	cp server/.env.example server/.env
+	sudo docker exec -it svideo-server yarn install
+	sudo docker exec -it svideo-server npx prisma migrate dev
+	sudo docker exec -it svideo-server pm2 start "yarn start:prod" --name server
+
+	cp clientside/.env.example clientside/.env
+	sudo docker exec -it svideo-client yarn install
+	sudo docker exec -it svideo-client yarn build
+	sudo docker exec -it svideo-client pm2 start "yarn start" --name client
