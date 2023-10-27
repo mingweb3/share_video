@@ -1,3 +1,7 @@
+/* eslint-disable no-console */
+/*
+ *  Temporary solution for Auth, Guard, Persist...
+ */
 import { useState } from 'react'
 
 import { getMeFn } from '@/services/auth.api'
@@ -10,14 +14,21 @@ export const useAuth = () => {
     const accessToken = await localStorage.getItem('at')
 
     if (accessToken) {
-      const data = await getMeFn(accessToken)
-
-      if (data) {
-        setMe(data)
-        setIsAuth(true)
-      } else {
+      try {
+        const data = await getMeFn(accessToken)
+        if (data) {
+          setMe(data)
+          setIsAuth(true)
+        } else {
+          setMe(undefined)
+          setIsAuth(false)
+          localStorage.clear()
+        }
+      } catch (error) {
+        console.log(error)
         setMe(undefined)
         setIsAuth(false)
+        localStorage.clear()
       }
     } else {
       setIsAuth(false)
