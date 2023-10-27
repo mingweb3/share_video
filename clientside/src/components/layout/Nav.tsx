@@ -16,7 +16,7 @@ function Nav() {
           <li>
             <span
               onClick={() => setShowModalLogin(true)}
-              className="text-graylight cursor-pointer font-light transition-colors hover:text-white"
+              className="cursor-pointer font-light text-graylight transition-colors hover:text-white"
               aria-hidden="true"
             >
               Log In
@@ -28,7 +28,7 @@ function Nav() {
           <li>
             <span
               onClick={() => setShowModalSignIn(true)}
-              className="text-graylight cursor-pointer font-light transition-colors hover:text-white"
+              className="cursor-pointer font-light text-graylight transition-colors hover:text-white"
               aria-hidden="true"
             >
               Sign In
