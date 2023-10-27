@@ -14,6 +14,7 @@ interface ISharedUrlForm {
 
 interface ISharedVideoList {
   pages: number
+  currentPage: number
   items: ISharedVideo[]
 }
 interface IVideo {
