@@ -29,22 +29,35 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 2. Backend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/server/README.md)
 
 
-#### Contact me: mingweb3@gmail.com
-
-
 -----------------------------------------------
+
 ### Deploy server
 
-```
-	sudo docker-compose up -d
+```bash
+# Install Docker Service
+$ sudo docker-compose up -d
 
-	cp server/.env.example server/.env
-	sudo docker exec -it svideo-server yarn install
-	sudo docker exec -it svideo-server npx prisma migrate dev
-	sudo docker exec -it svideo-server pm2 start "yarn start:prod" --name server
+# Setup Backend Side (NestJs + Prisma)
+$ cp server/.env.example server/.env
+$ sudo docker exec -it svideo-server yarn install
+$ sudo docker exec -it svideo-server npx prisma migrate dev
+$ sudo docker exec -it svideo-server pm2 start "yarn start:prod" --name server
 
-	cp clientside/.env.example clientside/.env
-	sudo docker exec -it svideo-client yarn install
-	sudo docker exec -it svideo-client yarn build
-	sudo docker exec -it svideo-client pm2 start "yarn start" --name client 
+# Setup Frontend Side (Next13)
+$ cp clientside/.env.example clientside/.env
+$ sudo docker exec -it svideo-client yarn install
+$ sudo docker exec -it svideo-client yarn build
+$ sudo docker exec -it svideo-client pm2 start "yarn start" --name client 
 ```
+
+### IF Docker can't pull Node18.7.0
+
+```bash
+$ docker builder prune -a 
+
+$ docker pull node:18.17.0
+```
+
+---
+
+#### Contact me: mingweb3@gmail.com
