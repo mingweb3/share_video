@@ -35,6 +35,7 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 -----------------------------------------------
 ### Deploy server
 
+```
 	sudo docker-compose up -d
 
 	cp server/.env.example server/.env
@@ -45,4 +46,5 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 	cp clientside/.env.example clientside/.env
 	sudo docker exec -it svideo-client yarn install
 	sudo docker exec -it svideo-client yarn build
-	sudo docker exec -it svideo-client pm2 start "yarn start" --name client
+	sudo docker exec -it svideo-client pm2 start "yarn start" --name client 
+```
