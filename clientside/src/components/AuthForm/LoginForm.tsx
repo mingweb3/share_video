@@ -59,6 +59,7 @@ function LoginForm({ onClose }: ILoginFormProps) {
         <div className="ipt-group mb-4">
           <input
             {...register('email', { pattern: EMAIL_REGEX, required: true })}
+            aria-label="email"
             type="text"
             className="ipt text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 block w-full rounded-lg  border border-gray3 bg-[#111111] p-2.5 text-sm dark:text-white"
             placeholder="Email"
@@ -72,6 +73,7 @@ function LoginForm({ onClose }: ILoginFormProps) {
         <div className="ipt-group">
           <input
             {...register('password', { pattern: PASSWORD_REGEX, required: true })}
+            data-testid="password-id"
             type="password"
             className="ipt text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 block w-full rounded-lg  border border-gray3 bg-[#111111] p-2.5 text-sm dark:text-white"
             placeholder="Password"

@@ -49,6 +49,50 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 ### Run Unit Test
 
-`yarn test-jest`
+`yarn test-jest` 
+
+I should write the test for the whole page, now i just have tests for specific components and intergration on the forms. The reason is React Query has conflict in "const queryClient = new QueryClient()". It takes time, so i can make it later.
+
+```
+/**
+ * CAN'T RUN THIS TEST BELOW
+ * - Test suite failed to run -
+ * TypeError: _reactquery.QueryClient is not a constructor
+ * Reason is Jest and react-query v5 .Take time to solve it
+ * https://tanstack.com/query/v5/docs/react/guides/testing
+ * https://www.js-howto.com/react-query-usemutation-with-jest-testing/
+ */
+```
+
+Please my tests in `__tests__`. There are some technique i try to use. I can write test mock request api from ServerSide. 
+
+```
+import 'whatwg-fetch'
+...
+const apiBase = process.env.API_BASE
+const postMock = {
+  userId: 1,
+  id: 1,
+  title: 'Title of the post ABC song',
+  body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
+}
+// Setup REQUEST SERVER
+const handlers = [
+  rest.get(`${apiBase}/posts/1`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(postMock))
+  })
+]
+const server = setupServer(...handlers)
+
+// Start request server
+const consoleSpy = jest.spyOn(console, 'log').mockImplementation()
+beforeAll(() => server.listen())
+afterEach(() => {
+  server.restoreHandlers()
+  consoleSpy.mockClear()
+})
+afterAll(() => server.close())
+```
+
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

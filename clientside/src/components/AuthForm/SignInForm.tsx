@@ -54,14 +54,21 @@ function SignInForm() {
         <div className="ipt-group mb-4">
           <input
             {...register('name', { pattern: NOT_EMPTY, required: true })}
+            aria-label="name"
             type="text"
             className="ipt text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 block w-full rounded-lg  border border-gray3 bg-[#111111] p-2.5 text-sm dark:text-white"
             placeholder="Your name"
           />
+          {errors.name && (
+            <div className="error msg pt-1 text-sm text-red" role="alert">
+              Name should not be empty!
+            </div>
+          )}
         </div>
         <div className="ipt-group mb-4">
           <input
             {...register('email', { pattern: EMAIL_REGEX, required: true })}
+            aria-label="email"
             type="text"
             className="ipt text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 block w-full rounded-lg  border border-gray3 bg-[#111111] p-2.5 text-sm dark:text-white"
             placeholder="Email"
@@ -76,6 +83,7 @@ function SignInForm() {
           <input
             {...register('password', { pattern: PASSWORD_REGEX, required: true })}
             type="password"
+            data-testid="password-id"
             className="ipt text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 block w-full rounded-lg  border border-gray3 bg-[#111111] p-2.5 text-sm dark:text-white"
             placeholder="Password"
           />
