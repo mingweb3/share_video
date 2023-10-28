@@ -24,15 +24,15 @@ function TopBarUser({ data }: ITopBarUserProps) {
         <button
           onClick={() => setShowModal(true)}
           type="button"
-          className="border-gray4 hover:bg-gray3 rounded border bg-transparent px-6 py-1 font-semibold text-white hover:border-transparent hover:text-white"
+          className="bg-transparent hover:border-transparent rounded border border-gray4 px-6 py-1 font-semibold text-white hover:bg-gray3 hover:text-white"
         >
           Share a movie
         </button>
       </div>
       {data && (
-        <div className="profile-bar text-graylight text-right">
+        <div className="profile-bar text-right text-graylight">
           Welcome <span>{data.email}</span>
-          <button onClick={logout} type="button" className="text-gray7e ml-2 underline hover:text-white">
+          <button onClick={logout} type="button" className="ml-2 text-gray7e underline hover:text-white">
             Log out
           </button>
         </div>

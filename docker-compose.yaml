@@ -1,0 +1,49 @@
+# Create a Docker Image from SourceCode
+version: '3.8'
+services:
+  svideo-db: 
+    image: postgres:15.0
+    container_name: svideo-db
+    ports:
+      - 5436:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sv123456098
+      POSTGRES_DB: sharevideodb
+    networks:
+      - mnestjs_network 
+    volumes:
+      - svideo-db:/var/lib/postgresql/data
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: svideo-server
+    restart: always
+    ports:
+      - 3002:3002
+    networks:
+      - mnestjs_network
+    volumes:
+      - ./server:/app
+
+  clientside:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: svideo-client
+    restart: always
+    ports:
+      - 4000:4000
+    networks:
+      - mnestjs_network 
+    volumes:
+      - ./clientside:/app
+
+networks:
+  mnestjs_network: 
+
+volumes:
+  svideo-db:
+    driver: local

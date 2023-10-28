@@ -7,7 +7,7 @@ interface ErrorFormProps {
 
 function ErrorBox({ errorData }: ErrorFormProps) {
   return (
-    <div className="sys-msg err-msg border-red bg-red text-red rounded-lg border-[1px] border-solid bg-opacity-10 px-4 py-2">
+    <div className="sys-msg err-msg rounded-lg border-[1px] border-solid border-red bg-red bg-opacity-10 px-4 py-2 text-red">
       <div className="font-bold">
         {errorData.statusCode} - {errorData.error}{' '}
       </div>
