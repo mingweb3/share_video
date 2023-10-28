@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "prisma:dev:deploy": "prisma migrate deploy",
+    "prisma:dev:deploy": "npx prisma migrate dev", 
     "db:dev:remove": "docker compose rm svideo-db --stop --force --volumes",
     "db:dev:create": "docker compose up svideo-db --detach",
     "db:dev:restart": "yarn db:dev:remove && yarn db:dev:create && yarn prisma:dev:deploy",

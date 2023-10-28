@@ -1,8 +1,8 @@
 'use client'
 
-import VideoItem from './VideoItem'
-
 import { getIDfromURL } from '@/utils/general.helper'
+
+import VideoItem from './VideoItem'
 
 interface IVideoListProps {
   data: ISharedVideo[]

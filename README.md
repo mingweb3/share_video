@@ -23,10 +23,51 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 - Include unit tests (again)
 - Include integration test
 
-## Folder Stucture 
+## Folder Stucture
 
-1. Frontend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/clientside/README.md)
-2. Backend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/server/README.md)
+1. Backend: NestJS + Prisma
+2. Frontend: NextJS 13 Only Use ClientSide
+3. Video live demo: http://share-video.everest.land:4000/
 
+-----------------------------------------------
+
+### 1. Deploy server - Fully Docker
+
+```bash
+# Install Docker Service
+$ sudo docker-compose up -d
+
+# Setup Backend Side (NestJs + Prisma)
+$ cp server/.env.example server/.env
+$ sudo docker exec -it svideo-server yarn install
+$ sudo docker exec -it svideo-server npx prisma migrate dev
+$ sudo docker exec -it svideo-server pm2 start "yarn start:prod" --name server
+
+# Setup Frontend Side (Next13)
+$ cp clientside/.env.example clientside/.env
+$ sudo docker exec -it svideo-client yarn install
+$ sudo docker exec -it svideo-client yarn build
+$ sudo docker exec -it svideo-client pm2 start "yarn start" --name client 
+```
+
+### IF Docker can't pull Node18.7.0
+
+```bash
+$ docker builder prune -a 
+
+$ docker pull node:18.17.0
+```
+
+### 2. Run on Local - Run database on Docker
+
+1. Install & Run Server Side 
+
+- Read this: Backend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/server/README.md)
+
+2. Install & Run Frontend
+
+- Read this: Frontend Side -> [Read this README](https://github.com/mingweb3/share_video/blob/master/clientside/README.md)
+ 
+---
 
 #### Contact me: mingweb3@gmail.com

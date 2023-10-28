@@ -66,16 +66,17 @@ function ShareVideoForm({ onClose }: IShareVideoFormProps) {
 
   return (
     <div className="w-[100%] sm:w-[480px]">
-      <div className="text-bold mb-1">Youtube URL</div>
+      <div className="mb-1 text-bold">Youtube URL</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register('url', { pattern: YT_VIDEO_URL_REGEX, required: true })}
+          aria-label="youtube url"
           type="text"
           className="ipt border-gray3 block w-full rounded-lg border bg-[#111111] p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
           placeholder="Paste your video url here"
         />
         {errors.url && (
-          <div className="error msg text-red pt-1 text-sm" role="alert">
+          <div className="pt-1 text-sm error msg text-red" role="alert">
             The URL should be youtube video with VideoID
           </div>
         )}
@@ -87,7 +88,7 @@ function ShareVideoForm({ onClose }: IShareVideoFormProps) {
         <div className="pt-4 text-right">
           <button
             type="submit"
-            className="bg-primary hover:bg-blue2 dark:bg-blue rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="dark:bg-blue bg-primary hover:bg-blue2 rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             SHARE
           </button>

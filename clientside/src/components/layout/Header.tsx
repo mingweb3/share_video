@@ -4,11 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
 
+import { useAuth } from '@/hooks/useAuth'
+
 import Container from './Container'
 import Nav from './Nav'
 import TopBarUser from '../TopBarUser'
-
-import { useAuth } from '@/hooks/useAuth'
 
 function Header() {
   // HOOK to handle token and persit for temporary.

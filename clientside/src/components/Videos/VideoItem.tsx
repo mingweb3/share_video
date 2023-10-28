@@ -3,12 +3,12 @@
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
+import { getYoutubeVideoById } from '@/services/youtube.api'
+
 import VideoItemPlaceholder from './VideoItemPlaceholder'
 import PlayerArrow from '../Svg/PlayerArrow'
 import VoteDownIcon from '../Svg/VoteDown'
 import VoteUpIcon from '../Svg/VoteUp'
-
-import { getYoutubeVideoById } from '@/services/youtube.api'
 
 import './VideoItem.css'
 
@@ -33,11 +33,11 @@ function VideoItem({ vId, sVideo }: IVideoItemProps) {
     <>
       {isLoading && <VideoItemPlaceholder />}
       {data && !isLoading && (
-        <div className="video-item border-gray3 border-b-[1px] border-solid pb-8 ">
+        <div className="video-item border-b-[1px] border-solid border-gray3 pb-8 ">
           <div className=" flex flex-col gap-6  sm:flex-row">
             <div className="video-thumb">
               <Link href={url} target="_blank">
-                <figure className="video-img border-gray3 overflow-hidden rounded-[12px] border-[1px] border-solid">
+                <figure className="video-img overflow-hidden rounded-[12px] border-[1px] border-solid border-gray3">
                   <img
                     src={
                       data.snippet.thumbnails.maxres
@@ -66,7 +66,7 @@ function VideoItem({ vId, sVideo }: IVideoItemProps) {
                 </div>
               </div>
               {data.snippet.description && (
-                <div className="desc text-graylight max-h-[110px] overflow-hidden pt-4">
+                <div className="desc max-h-[110px] overflow-hidden pt-4 text-graylight">
                   <div className="font-bold">Description:</div>
                   <div className="break-all">{data.snippet.description}</div>
                 </div>
