@@ -18,7 +18,8 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   // Relationship [1 User - n Notes]
-  videos          Video[]
+  videos         Video[]
+  Vote           Vote[]
 
   @@map("users")
 }
@@ -31,6 +32,19 @@ model Video {
   // Relationship [n Notes - 1 User]
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
+  Vote      Vote[]
 
-  @@map("videos") 
+  @@map("videos")
+}
+
+model Vote {
+  id      Int     @id @default(autoincrement())
+  videoId Int
+  userId  Int
+  value   Boolean
+  // Relationship [n Vote - n Video]
+  video   Video   @relation(fields: [videoId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@map("votes")
 }

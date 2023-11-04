@@ -5,12 +5,19 @@ services:
     image: postgres:15.0
     container_name: svideo-db
     ports:
-      - 5436:5432 # { port in host (this PC) } : {port in (Container) Docker }
+      - 5436:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: sv123456098
       POSTGRES_DB: sharevideodb
+    volumes:
+      - svideo-db:/var/lib/postgresql/data
     networks:
-      - mnestjs_network 
+      - mnestjs_network
+      
+volumes:
+  svideo-db:
+    driver: local
+
 networks: # Multiple services on a network "mnestjs_network"
   mnestjs_network: 
