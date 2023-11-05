@@ -24,6 +24,11 @@ export class VideoController {
     return this.videoService.getVideos(page, limit);
   }
 
+  @Get('i-votes')
+  getVideosWithVote(@Query() { page, limit }: PaginationParamsDto) {
+    return this.videoService.getVideosIncVotes(page, limit);
+  }
+
   @UseGuards(MJwtGuard)
   @Post()
   insertVideo(

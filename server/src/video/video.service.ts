@@ -8,7 +8,7 @@ export class VideoService {
 
   async getVideos(page = 1, limit = 4) {
     const offset = (page - 1) * limit;
-    console.log(offset);
+
     const [count, items] = await this.prismaService.$transaction([
       this.prismaService.video.count(),
       this.prismaService.video.findMany({
@@ -34,6 +34,57 @@ export class VideoService {
       pages: Math.ceil(count / limit),
       currentPage: page,
       items,
+    };
+  }
+
+  async getVideosIncVotes(page = 1, limit = 4) {
+    const offset = (page - 1) * limit;
+
+    const [count, items] = await this.prismaService.$transaction([
+      this.prismaService.video.count(),
+      this.prismaService.video.findMany({
+        include: {
+          user: {
+            select: {
+              id: true,
+              email: true,
+              hashedPassword: false, // All fields of a user - except 'hashedPassword'
+              name: true,
+            },
+          },
+          _count: {
+            select: {
+              votes: true,
+            },
+          },
+        },
+        orderBy: {
+          id: 'desc',
+        },
+        take: Number(limit),
+        skip: offset,
+      }),
+    ]);
+
+    // Count votes for each video
+    const countedVideos = items.map(async (item) => {
+      const countUp = await this.prismaService.vote.count({
+        where: { videoId: item.id, value: true },
+      });
+
+      return {
+        ...item,
+        upVote: countUp,
+        downVote: item._count.votes - countUp,
+      };
+    });
+
+    const videoWithVotes = await Promise.all(countedVideos);
+
+    return {
+      pages: Math.ceil(count / limit),
+      currentPage: page,
+      items: videoWithVotes,
     };
   }
 

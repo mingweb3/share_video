@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
 }
 
 datasource db {
@@ -19,7 +20,7 @@ model User {
   updatedAt      DateTime @updatedAt
   // Relationship [1 User - n Notes]
   videos         Video[]
-  Vote           Vote[]
+  votes          Vote[]
 
   @@map("users")
 }
@@ -32,7 +33,7 @@ model Video {
   // Relationship [n Notes - 1 User]
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
-  Vote      Vote[]
+  votes     Vote[]
 
   @@map("videos")
 }

@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MediaModule } from './media/media.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { VideoModule } from './video/video.module';
+import { VoteModule } from './vote/vote.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { VideoModule } from './video/video.module';
       dest: './uploads',
     }),
     VideoModule,
+    VoteModule,
   ],
   controllers: [AppController],
   providers: [AppService],
