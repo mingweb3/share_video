@@ -23,7 +23,7 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 - Include unit tests (again)
 - Include integration test
 
-## Folder Stucture
+## Folder Structure
 
 1. Backend: NestJS + Prisma
 2. Frontend: NextJS 13 Only Use ClientSide
