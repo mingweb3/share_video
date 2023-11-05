@@ -33,7 +33,7 @@ function VideoItem({ vId, sVideo }: IVideoItemProps) {
     <>
       {isLoading && <VideoItemPlaceholder />}
       {data && !isLoading && (
-        <div className="video-item border-b-[1px] border-solid border-gray3 pb-8 ">
+        <div className="video-item border-b-[1px] border-solid border-gray3 pb-8">
           <div className=" flex flex-col gap-6  sm:flex-row">
             <div className="video-thumb">
               <Link href={url} target="_blank">

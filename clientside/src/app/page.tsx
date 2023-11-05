@@ -1,67 +1,75 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-nested-ternary */
 
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-
 import { VideoList } from '@/components/Videos'
 import { itemPerPage } from '@/constant/site.config'
-import useQueryParams from '@/hooks/useQueryParams'
 import { getVideosFn } from '@/services/video.api'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function Home() {
-  const [dataList, setDataList] = useState<ISharedVideo[]>([])
+  // Infinity Loading
+  const { ref, inView } = useInView()
 
-  const { queryParams, setQueryParams } = useQueryParams<{
-    p?: string
-  }>()
-  const cPage = queryParams?.get('p') ? Number(queryParams?.get('p')) : 1
-
-  // query: Get Videos
-  const { data, isLoading } = useQuery({
-    queryKey: ['shared-videos', cPage],
-    queryFn: () => {
-      return getVideosFn({ limit: itemPerPage, page: Number(cPage) })
+  const { status, data, error, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
+    queryKey: ['shared-videos'],
+    queryFn: ({ pageParam }) => {
+      return getVideosFn({ limit: itemPerPage, page: Number(pageParam) })
     },
-    retry: 0
+    initialPageParam: 1,
+    getPreviousPageParam: (fdata: ISharedVideoList) => {
+      return fdata.currentPage === fdata.pages ? undefined : fdata.currentPage + 1
+    },
+    getNextPageParam: (ldata: ISharedVideoList) => {
+      return ldata.currentPage === ldata.pages ? undefined : ldata.currentPage + 1
+    }
   })
 
+  // Load next page when at the end
   useEffect(() => {
-    if (data && data.items.length > 0) {
-      setDataList([...dataList, ...data.items])
+    if (inView) {
+      fetchNextPage()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
-
-  // Actions: Load More items
-  const loadMoreVideos = (n: number) => {
-    console.log(n)
-    setQueryParams({ p: n.toString() })
-  }
+  }, [fetchNextPage, inView])
 
   return (
     <main className="h-full min-h-screen w-full p-6 sm:p-24">
       <div className="mx-auto max-w-[960px]">
         <div className="page-content">
-          {isLoading && <div className="text-center text-lg">Loading data...</div>}
-          {dataList && !isLoading && <VideoList data={dataList} />}
-          {data && (
-            <div>
-              {data.currentPage < data.pages ? (
-                <div className="pagin pt-10 text-center">
+          {status === 'pending' ? (
+            <div className="text-center">Loading...</div>
+          ) : status === 'error' ? (
+            <div className="text-center text-red">Error: {error.message}</div>
+          ) : (
+            <div className="flex flex-col gap-12">
+              {data.pages.map((page: unknown, i) => {
+                const { items, currentPage } = page as unknown as ISharedVideoList
+
+                if (items.length > 0)
+                  return (
+                    <div key={`${currentPage}-${i}`}>
+                      <VideoList data={items} />
+                    </div>
+                  )
+                return null
+              })}
+              {hasNextPage && (
+                <div className="text-center">
                   <button
-                    onClick={() => loadMoreVideos(cPage + 1)}
                     type="button"
                     className="bg-gray3 hover:bg-gray4 rounded-lg px-12 py-2 text-[12px]"
+                    ref={ref}
+                    onClick={() => fetchNextPage()}
+                    disabled={!hasNextPage || isFetchingNextPage}
                   >
-                    LOAD MORE
+                    {isFetchingNextPage ? 'Loading more...' : hasNextPage ? 'Load Newer' : 'Nothing more to load'}
                   </button>
                 </div>
-              ) : (
-                <span> </span>
               )}
             </div>
           )}
