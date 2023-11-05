@@ -50,12 +50,7 @@ export default function Home() {
               {data.pages.map((page: unknown, i) => {
                 const { items, currentPage } = page as unknown as ISharedVideoList
 
-                if (items.length > 0)
-                  return (
-                    <div key={`${currentPage}-${i}`}>
-                      <VideoList data={items} />
-                    </div>
-                  )
+                if (items.length > 0) return <VideoList key={`${currentPage}-${i}`} data={items} />
                 return null
               })}
               {hasNextPage && (
