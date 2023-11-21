@@ -27,7 +27,7 @@ FE applicants should accomplish the first 3 features. While BE and Fullstack app
 
 1. Backend: NestJS + Prisma
 2. Frontend: NextJS 13 Only Use ClientSide
-3. Video live demo: http://share-video.everest.land:4000/
+3. View live demo: http://share-video.everest.land:4000/
 
 -----------------------------------------------
 
