@@ -8,6 +8,7 @@ export class UserController {
   @UseGuards(MJwtGuard)
   @Get('me')
   getMe(@GetUser() user: User) {
+    // Return USER
     return user;
   }
 }
