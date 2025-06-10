@@ -1,6 +1,6 @@
 'use client'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import type { SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
@@ -17,8 +17,6 @@ interface IShareVideoFormProps {
 }
 
 function ShareVideoForm({ onClose }: IShareVideoFormProps) {
-  const queryClient = useQueryClient()
-
   // API Login Mutation
   const {
     mutate: postUrl,
@@ -32,7 +30,7 @@ function ShareVideoForm({ onClose }: IShareVideoFormProps) {
         setTimeout(() => window.location.reload(), 200)
       }
       onClose()
-      queryClient.invalidateQueries({ queryKey: ['shared-videos', 1], exact: true })
+      window.location.href = '/'
     }
   })
 
